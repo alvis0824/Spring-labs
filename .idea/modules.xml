@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/lab-00-coupling/lab-00-coupling.iml" filepath="$PROJECT_DIR$/lab-00-coupling/lab-00-coupling.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lab-01-ioc/lab-01-ioc.iml" filepath="$PROJECT_DIR$/lab-01-ioc/lab-01-ioc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lab-02-di/lab-02-di.iml" filepath="$PROJECT_DIR$/lab-02-di/lab-02-di.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lab-04-springmvc/lab-04-springmvc.iml" filepath="$PROJECT_DIR$/lab-04-springmvc/lab-04-springmvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-Spring-labs.iml" filepath="$PROJECT_DIR$/my-Spring-labs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yummy-recipe-application/yummy-recipe-application.iml" filepath="$PROJECT_DIR$/yummy-recipe-application/yummy-recipe-application.iml" />
+    </modules>
+  </component>
+</project>
