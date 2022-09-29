@@ -17,7 +17,7 @@
             <h3> Cart Total Amount</h3>
             <td th:text="${cartTotalAmount}"></td>  <!-- todo put cart total amount cart.getCartTotalAmount()-->
 
-            <div th:unless="${#lists.isEmpty(cartItemList)}"> <!-- todo check cart item list equals not zero, otherwise it will not show added product-->
+            <div th:unless="${#lists.isEmpty(cartItemList)}" method="post"> <!-- todo check cart item list equals not zero, otherwise it will not show added product-->
                 <h2 class="my-5"></h2>
                 <table class="table table-striped table-responsive-md">
                     <thead>
