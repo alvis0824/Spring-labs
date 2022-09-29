@@ -28,7 +28,7 @@ CartController {
         return "cart/show-cart";
     }
 
-    @PostMapping("/delete/{productId}")
+    @GetMapping("/delete/{productId}")
     public String delete(@PathVariable UUID productId, Model model){
         cartService.deleteFromCart(productId);
         model.addAttribute("cartItemList",CartServiceImpl.CART.getCartItemList());
