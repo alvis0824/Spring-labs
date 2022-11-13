@@ -23,7 +23,7 @@ public class ProductController {
 
     @GetMapping("/list")
     public String list(Model model) {
-        model.addAttribute("productList", productRepository.findAll());
+        model.addAttribute("productList", productService.listProduct());
         return "product/list";
     }
 
@@ -36,8 +36,6 @@ public class ProductController {
     @PostMapping("/create-product")
     public String createProduct(@ModelAttribute("product") Product product, Model model) {
         productService.productCreate(product);
-        productRepository.save(product);
-        model.addAttribute("productList", productRepository.findAll());
-        return "product/list";
+        return "redirect:/list";
     }
 }

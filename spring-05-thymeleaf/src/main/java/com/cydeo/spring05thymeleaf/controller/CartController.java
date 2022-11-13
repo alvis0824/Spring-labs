@@ -1,5 +1,6 @@
 package com.cydeo.spring05thymeleaf.controller;
 
+import com.cydeo.spring05thymeleaf.service.CartService;
 import com.cydeo.spring05thymeleaf.service.impl.CartServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,37 +9,38 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.UUID;
 
+import static com.cydeo.spring05thymeleaf.service.impl.CartServiceImpl.CART;
+
 @Controller
 public class
 CartController {
 
-    private final CartServiceImpl cartService;
+    private final CartService cartService;
 
-    public CartController(CartServiceImpl cartService) {
+    public CartController(CartService cartService) {
         this.cartService = cartService;
-    }
-
-    @GetMapping("/addToCart/{productId}/{quantity}")
-    public String addToCart(@PathVariable UUID productId, @PathVariable Integer quantity, Model model){
-        cartService.addToCart(productId, quantity);
-        model.addAttribute("cartItemList",CartServiceImpl.CART.getCartItemList());
-        model.addAttribute("cartTotalAmount",CartServiceImpl.CART.getCartTotalAmount());
-        return "cart/show-cart";
-    }
-
-    @GetMapping("/delete/{productId}")
-    public String delete(@PathVariable UUID productId, Model model){
-        cartService.deleteFromCart(productId);
-        model.addAttribute("cartItemList",CartServiceImpl.CART.getCartItemList());
-        model.addAttribute("cartTotalAmount",CartServiceImpl.CART.getCartTotalAmount());
-        return "cart/show-cart";
     }
 
     @GetMapping("/cart")
     public String cart(Model model){
-        model.addAttribute("cartItemList",CartServiceImpl.CART.getCartItemList());
-        model.addAttribute("cartTotalAmount",CartServiceImpl.CART.getCartTotalAmount());
+        model.addAttribute("cartItemList",CART.getCartItemList());
+        model.addAttribute("cartTotalAmount", CART.getCartTotalAmount());
         return "cart/show-cart";
     }
+
+
+    @GetMapping("/addToCart/{productId}/{quantity}")
+    public String addToCart(@PathVariable UUID productId, @PathVariable Integer quantity){
+        cartService.addToCart(productId, quantity);
+        return "redirect:/cart";
+    }
+
+    @GetMapping("/delete/{productId}")
+    public String delete(@PathVariable UUID productId){
+        cartService.deleteFromCart(productId);
+        return "redirect:/cart";
+    }
+
+
 
 }
