@@ -1,13 +1,16 @@
 package com.cydeo.lab07ormqueries.entity;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Table(name = "orders")
 public class Order extends BaseEntity {
@@ -23,4 +26,15 @@ public class Order extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_id")
     private Payment payment;
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "paidPrice=" + paidPrice +
+                ", totalPrice=" + totalPrice +
+                ", cart=" + cart +
+                ", customer=" + customer +
+                ", payment=" + payment +
+                '}';
+    }
 }

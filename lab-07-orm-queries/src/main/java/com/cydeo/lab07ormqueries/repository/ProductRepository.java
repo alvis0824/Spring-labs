@@ -16,25 +16,26 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findTop3ByOrderByPriceDesc();
 
     //Write a derived query to get product by specific name
-    List<Product> findByName(String name);
+    Product findFirstByName(String name);
 
     //Write a derived query to get product by specific category
-    List<Product> findByCategory(Category category);
+    List<Product> findByCategoryListContaining(Category category);
 
     //Write a derived query to get count by price greater than specific amount
-    Integer countByPriceGreaterThan(BigDecimal price);
+    Integer countProductByPriceGreaterThan(BigDecimal price);
 
     //Write a derived query to get all product by quantity greater than or equal specific count
-    List<Product> findAllByQuantityGreaterThanEqual(Integer count);
+    List<Product> findAllByQuantityIsGreaterThanEqual(int count);
 
     //Write a native query to get all product by price greater than specific amount and quantity lower than specific count
-    List<Product> findAllByPriceGreaterThanAndQuantityLessThan(BigDecimal price, Integer count);
+    @Query(value = "select * from product p where p.price > ?1 and p.remaining_quantity < ?2", nativeQuery = true)
+    List<Product> retrieveProductListGreaterThanPriceAndLowerThanRemainingQuantity(BigDecimal price, int remainingQuantity);
 
     //Write a native query to get all product by specific categoryId
     @Query(value = "SELECT * FROM product p JOIN product_category_rel pcr ON p.id = pcr.p_id WHERE pcr.c_id = ?1", nativeQuery = true)
     List<Product> getByCategoryId(Long id);
 
     //Write a native query to get all product by specific categoryId and price greater than specific amount
-    @Query(value = "SELECT * FROM product p JOIN product_category_rel pcr ON p.id = pcr.p_id WHERE pcr.c_id = ?1 AND p.price = ?2", nativeQuery = true)
-    List<Product> getByCategoryIdAndPrice(@Param("id") Long id, @Param("price") BigDecimal price);
+    @Query(value = "SELECT * FROM product p JOIN product_category_rel pcr ON p.id = pcr.p_id WHERE pcr.c_id in (?1) AND p.price > ?2", nativeQuery = true)
+    List<Product> getByCategoryIdAndPrice(@Param("id") List<Long> id, @Param("price") BigDecimal price);
 }

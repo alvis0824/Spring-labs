@@ -29,12 +29,6 @@ public class QueryDemo implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-        addressRepository.findAllByCustomer_FirstNameAndCustomer_LastName("Moina","O'Kinneally");
-        addressRepository.findAllByStreetStartingWith("Ev");
-        addressRepository.findByCustomer_Id(5L);
-        addressRepository.findByCustomer_UserName("cbevissb");
-
-
+        System.out.println(orderRepository.existsByCustomerEmail("lorwell7d@ebay.com"));
     }
 }
