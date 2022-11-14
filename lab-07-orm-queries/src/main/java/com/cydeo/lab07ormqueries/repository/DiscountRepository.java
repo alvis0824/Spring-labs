@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface DiscountRepository extends JpaRepository<Discount, Long> {
     //Write a derived query to get discount by name
-    List<Discount> findAllByName(String name);
+    Discount findFirstByName(String name);
 
     //Write a derived query to get all discounts greater than discount amount
     List<Discount> findAllByDiscountGreaterThan(BigDecimal discountAmount);
