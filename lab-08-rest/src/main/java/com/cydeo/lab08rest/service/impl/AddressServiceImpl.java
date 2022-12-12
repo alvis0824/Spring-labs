@@ -2,26 +2,27 @@ package com.cydeo.lab08rest.service.impl;
 
 import com.cydeo.lab08rest.dto.AddressDTO;
 import com.cydeo.lab08rest.entity.Address;
+import com.cydeo.lab08rest.entity.Customer;
 import com.cydeo.lab08rest.mapper.MapperUtil;
 import com.cydeo.lab08rest.repository.AddressRepository;
 import com.cydeo.lab08rest.repository.CustomerRepository;
 import com.cydeo.lab08rest.service.AddressService;
+import com.cydeo.lab08rest.service.CustomerService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
 public class AddressServiceImpl implements AddressService {
 
     private final AddressRepository addressRepository;
-    private final CustomerRepository customerRepository;
+    private final CustomerService customerService;
     private final MapperUtil mapperUtil;
 
-    public AddressServiceImpl(AddressRepository addressRepository, CustomerRepository customerRepository, MapperUtil mapperUtil) {
+    public AddressServiceImpl(AddressRepository addressRepository, CustomerService customerService, MapperUtil mapperUtil) {
         this.addressRepository = addressRepository;
-        this.customerRepository = customerRepository;
+        this.customerService = customerService;
         this.mapperUtil = mapperUtil;
     }
 
@@ -40,8 +41,13 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public AddressDTO update(AddressDTO addressDTO) {
-        Address address = addressRepository.save(mapperUtil.convert(addressDTO, new Address()));
-        return mapperUtil.convert(address, new AddressDTO());
+        Address address = mapperUtil.convert(addressDTO, new Address());
+
+        address.setCustomer(mapperUtil.convert(customerService.findById(addressDTO.getCustomerId()), new Customer()));
+
+        Address updatedAddress = addressRepository.save(address);
+
+        return mapperUtil.convert(updatedAddress, new AddressDTO());
     }
 
     @Override
@@ -60,7 +66,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public List<AddressDTO> getByCustomerIdAndName(Long id, String name) {
-        return addressRepository.findAllByCustomerAndName(customerRepository.findById(id).get(), name).stream()
+        return addressRepository.findAllByCustomerIdAndName(id,name).stream()
                 .map(address -> mapperUtil.convert(address, new AddressDTO()))
                 .collect(Collectors.toList());
     }
