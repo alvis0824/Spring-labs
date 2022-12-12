@@ -20,22 +20,24 @@ public class DiscountController {
 
     @GetMapping
     public ResponseEntity<ResponseWrapper> getDiscountList(){
-        return ResponseEntity.ok(new ResponseWrapper("Discount list is successfully retrieved", discountService.getDiscountList(), HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Discount list is successfully retrieved",
+                discountService.getDiscountList(), HttpStatus.OK));
     }
     @GetMapping("/{name}")
     public ResponseEntity<ResponseWrapper> getDiscountListByName(@PathVariable("name") String name){
-        return ResponseEntity.ok(new ResponseWrapper("Discount list is successfully retrieved", discountService.getDiscountByName(name), HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Discount list is successfully retrieved",
+                discountService.getDiscountByName(name), HttpStatus.OK));
     }
 
     @PostMapping
     public ResponseEntity<ResponseWrapper> createDiscount(@RequestBody DiscountDTO discountDTO){
-        discountService.createDiscount(discountDTO);
-        return ResponseEntity.ok(new ResponseWrapper("Discount is successfully created", HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Discount is successfully created",
+                discountService.createDiscount(discountDTO), HttpStatus.OK));
     }
 
     @PutMapping
     public ResponseEntity<ResponseWrapper> updateDiscount(@RequestBody DiscountDTO discountDTO){
-        discountService.updateDiscount(discountDTO);
-        return ResponseEntity.ok(new ResponseWrapper("Discount is successfully updated", HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Discount is successfully updated",
+                discountService.updateDiscount(discountDTO), HttpStatus.OK));
     }
 }

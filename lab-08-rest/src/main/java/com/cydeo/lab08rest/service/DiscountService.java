@@ -10,7 +10,7 @@ public interface DiscountService {
     List<DiscountDTO> getDiscountList();
     DiscountDTO getDiscountByName(String name);
 
-    void createDiscount(DiscountDTO discount);
+    DiscountDTO createDiscount(DiscountDTO discount);
 
-    void updateDiscount(DiscountDTO discount);
+    DiscountDTO updateDiscount(DiscountDTO discount);
 }
