@@ -33,16 +33,15 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public void create(AddressDTO address) {
-        address.setId(UUID.randomUUID().getMostSignificantBits());
-        Address addressToSave = mapperUtil.convert(address, new Address());
-        addressRepository.save(addressToSave);
+    public AddressDTO create(AddressDTO addressDTO) {
+        Address address = addressRepository.save(mapperUtil.convert(addressDTO, new Address()));
+        return mapperUtil.convert(address, new AddressDTO());
     }
 
     @Override
-    public void update(AddressDTO addressDTO) {
-        Address addressToSave = mapperUtil.convert(addressDTO, new Address());
-        addressRepository.save(addressToSave);
+    public AddressDTO update(AddressDTO addressDTO) {
+        Address address = addressRepository.save(mapperUtil.convert(addressDTO, new Address()));
+        return mapperUtil.convert(address, new AddressDTO());
     }
 
     @Override

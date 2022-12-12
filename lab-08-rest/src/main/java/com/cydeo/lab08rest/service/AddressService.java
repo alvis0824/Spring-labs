@@ -8,9 +8,9 @@ public interface AddressService {
 
     List<AddressDTO> findAll();
 
-    void create(AddressDTO address);
+    AddressDTO create(AddressDTO address);
 
-    void update(AddressDTO addressDTO);
+    AddressDTO update(AddressDTO addressDTO);
 
     List<AddressDTO> retrieveByCustomerId(Long id);
 

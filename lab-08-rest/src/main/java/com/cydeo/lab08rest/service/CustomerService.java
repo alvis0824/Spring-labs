@@ -11,9 +11,9 @@ public interface CustomerService {
 
     CustomerDTO retrieveByEmail(String email);
 
-    void createCustomer(CustomerDTO customer);
+    CustomerDTO createCustomer(CustomerDTO customer);
 
-    void updateCustomer(CustomerDTO customer);
+    CustomerDTO updateCustomer(CustomerDTO customer);
 
     CustomerDTO findById(Long customerId);
 }

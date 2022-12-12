@@ -19,23 +19,25 @@ public class CustomerController {
 
     @GetMapping
     public ResponseEntity<ResponseWrapper> getCustomerList(){
-        return ResponseEntity.ok(new ResponseWrapper("Customers are successfully retrieved", customerService.findAll(), HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Customers are successfully retrieved",
+                customerService.findAll(), HttpStatus.OK));
     }
 
     @GetMapping("/{email}")
     public ResponseEntity<ResponseWrapper> getCustomerListByEmail(@PathVariable("email") String email){
-        return ResponseEntity.ok(new ResponseWrapper("Customers are successfully retrieved", customerService.retrieveByEmail(email), HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Customers are successfully retrieved",
+                customerService.retrieveByEmail(email), HttpStatus.OK));
     }
 
     @PostMapping
     public ResponseEntity<ResponseWrapper> createCustomer(@RequestBody CustomerDTO customerDTO){
-        customerService.createCustomer(customerDTO);
-        return ResponseEntity.ok(new ResponseWrapper("Customer is successfully created", customerDTO, HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Customer is successfully created",
+                customerService.createCustomer(customerDTO), HttpStatus.OK));
     }
 
     @PutMapping
     public ResponseEntity<ResponseWrapper> updateCustomer(@RequestBody CustomerDTO customerDTO){
-        customerService.updateCustomer(customerDTO);
-        return ResponseEntity.ok(new ResponseWrapper("Customer is successfully updated", customerDTO, HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Customer is successfully updated",
+                customerService.updateCustomer(customerDTO), HttpStatus.OK));
     }
 }

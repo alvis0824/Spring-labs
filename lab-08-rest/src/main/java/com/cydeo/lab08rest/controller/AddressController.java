@@ -24,28 +24,31 @@ public class AddressController {
 
     @PostMapping
     public ResponseEntity<ResponseWrapper> createAddress(@RequestBody AddressDTO address){
-        addressService.create(address);
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseWrapper("Address is successfully created", address, HttpStatus.OK));
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseWrapper("Address is successfully created",
+                addressService.create(address), HttpStatus.OK));
     }
 
     @PutMapping
     public ResponseEntity<ResponseWrapper> updateAddress(@RequestBody AddressDTO address){
-        addressService.update(address);
-        return ResponseEntity.ok(new ResponseWrapper("Address is successfully updated", address, HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Address is successfully updated",
+                addressService.update(address), HttpStatus.OK));
     }
 
     @GetMapping("/customer/{customerId}")
     public ResponseEntity<ResponseWrapper> getAddressListByCustomerId(@PathVariable("customerId") Long customerId){
-        return ResponseEntity.ok(new ResponseWrapper("Addresses are successfully retrieved", addressService.retrieveByCustomerId(customerId), HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Addresses are successfully retrieved",
+                addressService.retrieveByCustomerId(customerId), HttpStatus.OK));
     }
 
     @GetMapping("/startsWith/{address}")
     public ResponseEntity<ResponseWrapper> getAddressListByStartsWithAddress(@PathVariable("address") String address){
-        return ResponseEntity.ok(new ResponseWrapper("Address starts with " + address + "is successfully retrieved", addressService.retrieveStartsWith(address), HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Address starts with " + address + "is successfully retrieved",
+                addressService.retrieveStartsWith(address), HttpStatus.OK));
     }
 
     @GetMapping("/customer/{customerId}/name/{name}")
     public ResponseEntity<ResponseWrapper> getAddressListByCustomerAndName(@PathVariable("customerId") Long customerId, @PathVariable("name") String name){
-        return ResponseEntity.ok(new ResponseWrapper("Address is successfully retrieved", addressService.getByCustomerIdAndName(customerId, name), HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Address is successfully retrieved",
+                addressService.getByCustomerIdAndName(customerId, name), HttpStatus.OK));
     }
 }
